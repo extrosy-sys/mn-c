@@ -3,38 +3,278 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LongExpo</title>
+<title>LongExpo — long-exposure photography, no tripod, just your phone</title>
+<meta name="description" content="LongExpo stacks aligned video frames into real long-exposure photographs — silky waterfalls, light trails, vanished crowds — handheld, offline, up to 8K.">
+<meta property="og:title" content="LongExpo — long exposure, no tripod">
+<meta property="og:description" content="Silky water, light trails, vanished crowds. Handheld long-exposure photography for Android, processed entirely on your phone.">
+<meta property="og:image" content="https://extrosy.com/longexpo/img/hero.jpg">
+<meta property="og:url" content="https://extrosy.com/longexpo/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6; max-width: 640px; margin: 0 auto; padding: 3rem 1.25rem;
-    color: #1a1a1a; background: #fff;
+  :root {
+    --bg: #0b0d10;
+    --panel: #12151a;
+    --line: #232830;
+    --ink: #e8ebee;
+    --dim: #9aa3ad;
+    --accent: #b0e0ff;           /* the app's own dial accent */
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
   }
-  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #7bb8ff; } }
-  h1 { font-size: 2rem; margin-bottom: 0.25rem; }
-  .tagline { color: #888; margin-top: 0; }
-  ul { padding-left: 1.2rem; }
-  .muted { color: #888; font-size: 0.9rem; margin-top: 2.5rem; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-stretch: 100%;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.4rem; }
+
+  .label {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .label::before { content: "— "; color: var(--dim); }
+
+  /* ---------- hero ---------- */
+  header { padding: 4.5rem 0 3.5rem; }
+  .hero {
+    display: grid; grid-template-columns: 1.15fr 0.85fr;
+    gap: 3rem; align-items: center;
+  }
+  .brand {
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 2.2rem;
+  }
+  .brand b { color: var(--ink); font-weight: 500; }
+  h1 {
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-stretch: 62%; font-weight: 900;
+    line-height: 1.02; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h1 .silk { color: var(--accent); }
+  .tagline { margin-top: 1.3rem; font-size: 1.15rem; color: var(--dim); max-width: 34rem; }
+  .tagline b { color: var(--ink); font-weight: 600; }
+  .cta { margin-top: 2.2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .badge {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em;
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0.65rem 1.1rem;
+  }
+  .cta .sub { font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
+
+  .phone {
+    justify-self: center;
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 10px; max-width: 330px;
+  }
+  .phone img { width: 100%; }
+  .phone figcaption {
+    font-family: var(--mono); font-size: 0.68rem; color: var(--dim);
+    padding-top: 9px; letter-spacing: 0.06em;
+  }
+  .phone figcaption b { color: var(--accent); font-weight: 500; }
+
+  /* ---------- sections ---------- */
+  section { border-top: 1px solid var(--line); padding: 4rem 0; }
+  h2 {
+    font-stretch: 70%; font-weight: 800; font-size: 1.9rem;
+    margin: 0.6rem 0 0.8rem; letter-spacing: -0.01em; text-wrap: balance;
+  }
+  .lede { color: var(--dim); max-width: 44rem; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  /* how it works */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.2rem; }
+  .step { background: var(--panel); padding: 1.5rem; }
+  .step .n { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; }
+  .step h3 { font-size: 1.05rem; margin: 0.6rem 0 0.4rem; font-weight: 700; }
+  .step p { font-size: 0.92rem; color: var(--dim); }
+
+  /* modes HUD */
+  .modes { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+  .mode {
+    flex: 1 1 170px; border: 1px solid var(--line); padding: 1.1rem 1.2rem; background: var(--panel);
+  }
+  .mode .name { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--accent); }
+  .mode p { font-size: 0.88rem; color: var(--dim); margin-top: 0.45rem; }
+
+  /* features */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
+  .feat h3 { font-size: 1rem; font-weight: 700; }
+  .feat h3::before { content: "▸ "; color: var(--accent); }
+  .feat p { font-size: 0.92rem; color: var(--dim); margin-top: 0.3rem; }
+
+  /* gallery */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2.4rem; }
+  .gallery figure { border: 1px solid var(--line); background: var(--panel); padding: 8px; }
+  .gallery img { width: 100%; height: auto; }
+  .gallery figcaption { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); padding-top: 8px; letter-spacing: 0.05em; line-height: 1.5; }
+  .gallery figcaption b { color: var(--ink); font-weight: 500; }
+
+  /* pricing */
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.4rem; max-width: 720px; }
+  .tier { border: 1px solid var(--line); background: var(--panel); padding: 1.8rem; }
+  .tier.pro { border-color: var(--accent); }
+  .tier h3 { font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .tier.pro h3 { color: var(--accent); }
+  .tier ul { list-style: none; padding: 0; margin-top: 1rem; }
+  .tier li { font-size: 0.92rem; color: var(--dim); padding: 0.3rem 0; }
+  .tier li::before { content: "· "; color: var(--accent); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; font-size: 0.85rem; color: var(--dim); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .phone { justify-self: start; }
+    .steps { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .tiers { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
-  <h1>LongExpo</h1>
-  <p class="tagline">Synthetic long-exposure photography for Android.</p>
 
-  <p>
-    LongExpo turns your phone into a long-exposure camera — stacking live frames to capture
-    light trails, silky water, and motion blur, all processed on your device. It works fully
-    offline and stores photos only in your own gallery.
-  </p>
+<header class="wrap">
+  <p class="brand"><b>LongExpo</b> · by Extrosy</p>
+  <div class="hero">
+    <div>
+      <h1>Long exposure.<br>No tripod. No filters.<br><span class="silk">Just your phone.</span></h1>
+      <p class="tagline">
+        LongExpo stacks hundreds of aligned frames into a single photograph —
+        <b>silky waterfalls, light trails, vanished crowds</b> — steadied against your
+        handshake, frame by frame, entirely on your phone.
+      </p>
+      <div class="cta">
+        <span class="badge">COMING SOON TO GOOGLE PLAY</span>
+        <span class="sub">Android 10+ · works fully offline</span>
+      </div>
+    </div>
+    <figure class="phone">
+      <img src="img/falls.jpg" alt="Waterfall pouring over a limestone ledge into a pool, water rendered as silky white veils" width="787" height="1400">
+      <figcaption><b>Handheld.</b> Shot standing at the railing — no tripod, no ND glass.</figcaption>
+    </figure>
+  </div>
+</header>
 
-  <ul>
-    <li><a href="/longexpo/privacy/">Privacy policy</a></li>
-  </ul>
+<section id="how">
+  <div class="wrap">
+    <p class="label">How it works</p>
+    <h2>One exposure, built from hundreds of frames</h2>
+    <p class="lede">
+      A traditional long exposure holds the shutter open — which means a tripod, an ND filter,
+      and one chance to get it right. LongExpo instead records a stream of short, sharp frames
+      and <b>registers every frame to the scene</b> before blending, so the static world stays
+      tack-sharp while motion melts.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01 / CAPTURE</span>
+        <h3>Live or imported</h3>
+        <p>Point and hold for seconds or minutes — or import any video you've already shot and turn it into a long exposure after the fact.</p>
+      </div>
+      <div class="step">
+        <span class="n">02 / ALIGN</span>
+        <h3>Steadied per frame</h3>
+        <p>Two alignment engines — an anchor-tracking mode and a dedicated no-anchor mode built for scenes that are mostly moving water — cancel your handshake frame by frame.</p>
+      </div>
+      <div class="step">
+        <span class="n">03 / STACK</span>
+        <h3>Blended on the GPU</h3>
+        <p>Frames accumulate in all blend modes at once, live while you shoot — so you can switch the look before, during, or after the exposure.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <p class="muted">
-    Published by Extrosy · <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a><br>
-    <a href="/">extrosy.com</a>
-  </p>
+<section id="modes">
+  <div class="wrap">
+    <p class="label">Blend modes</p>
+    <h2>Five ways to melt time</h2>
+    <div class="modes">
+      <div class="mode"><span class="name">AVERAGE</span><p>The classic ND-filter look — silky water, softened clouds, crowds fading to ghosts.</p></div>
+      <div class="mode"><span class="name">SUM</span><p>Light accumulates with an adjustable gain — a virtual aperture for night scenes.</p></div>
+      <div class="mode"><span class="name">LIGHTEN</span><p>Keeps the brightest pixel — light trails, star trails, fireworks.</p></div>
+      <div class="mode"><span class="name">DARKEN</span><p>Keeps the darkest pixel — erase bright moving objects from a scene.</p></div>
+      <div class="mode"><span class="name">TRAILS</span><p>Average plus an adjustable highlight streak — comet-tail motion.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <p class="label">Features</p>
+    <h2>A real camera instrument, not a filter app</h2>
+    <div class="grid">
+      <div class="feat"><h3>No tripod needed</h3><p>Per-frame registration keeps static detail sharp while motion blurs — shoot leaning on a railing or standing freehand.</p></div>
+      <div class="feat"><h3>Turn any video into a long exposure</h3><p>Import a clip, trim it, pick an alignment mode and output size, done. Hardware-accelerated decode handles big files fast.</p></div>
+      <div class="feat"><h3>Up to 8K output</h3><p>Import stacks render at up to 7680&times;4320 (Pro) with a fully GPU-resident pipeline — pixel-peep at 1:1.</p></div>
+      <div class="feat"><h3>Paint-mask compositor</h3><p>Painted a subject that should stay frozen? Brush or magic-wand it and that region comes from a single sharpest frame instead of the blur.</p></div>
+      <div class="feat"><h3>Camera-body dials</h3><p>Settings ride on draggable rulers with haptic detents — exposure, timer, zoom, and full manual optical exposure with real ISO and shutter stops.</p></div>
+      <div class="feat"><h3>Every lens</h3><p>Ultra-wide to tele to front camera — each lens is a first-class citizen in the zoom row.</p></div>
+      <div class="feat"><h3>Finish in-app</h3><p>Sharpen, film-style filters, and pinch-zoom review before saving a full-quality JPEG with proper camera EXIF (GPS optional, off by default).</p></div>
+      <div class="feat"><h3>Private by design</h3><p>No account, no network, no analytics. Photos go to your gallery and nowhere else — the app works in airplane mode.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <p class="label">Shot with LongExpo</p>
+    <h2>Straight off the phone</h2>
+    <p class="lede">Every image below was shot handheld with LongExpo and saved in-app. No desktop editing.</p>
+    <div class="gallery">
+      <figure><img src="img/hero.jpg" alt="Sunlit forest creek, rapids rendered silky between sharp boulders" loading="lazy" width="1237" height="2200"><figcaption><b>Forest creek, midday.</b> Stacked from an imported 8K clip — boulders stay crisp while the rapids melt.</figcaption></figure>
+      <figure><img src="img/falls.jpg" alt="Waterfall over a rock ledge into a churning pool, rendered as soft veils" loading="lazy" width="787" height="1400"><figcaption><b>Falls at the overlook.</b> Handheld at the railing, Average mode.</figcaption></figure>
+      <figure><img src="img/spillway.jpg" alt="Sheet of water flowing over a dam spillway, glassy smooth" loading="lazy" width="787" height="1400"><figcaption><b>Spillway.</b> Fast sheet flow becomes glass; the wall keeps its texture.</figcaption></figure>
+      <figure><img src="img/rapids.jpg" alt="Whitewater rushing between rocks, water misty, rocks sharp" loading="lazy" width="787" height="1400"><figcaption><b>Whitewater.</b> The no-anchor engine, built for frames that are mostly moving water.</figcaption></figure>
+      <figure><img src="img/rocks.jpg" alt="Close-up of mossy rocks in a silky stream" loading="lazy" width="787" height="1400"><figcaption><b>Detail study.</b> Close focus — mossy stones tack-sharp inside flowing silk.</figcaption></figure>
+      <figure><img src="img/highway.jpg" alt="Highway traffic blurred with motion, shot from inside a moving car" loading="lazy" width="787" height="1400"><figcaption><b>At speed.</b> Shot from the passenger seat of a moving car — alignment locked onto the van ahead.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <p class="label">Editions</p>
+    <h2>Free to shoot. Pro to go huge.</h2>
+    <div class="tiers">
+      <div class="tier">
+        <h3>LongExpo</h3>
+        <ul>
+          <li>All blend modes &amp; both alignment engines</li>
+          <li>Live capture and video import</li>
+          <li>Paint-mask, filters, sharpen</li>
+          <li>720p &amp; 1080p output</li>
+        </ul>
+      </div>
+      <div class="tier pro">
+        <h3>LongExpo Pro</h3>
+        <ul>
+          <li>Everything in the free edition</li>
+          <li>4K output — live and import</li>
+          <li>8K output from imported video</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Extrosy · <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a></span>
+    <span><a href="/longexpo/privacy/">Privacy policy</a> · <a href="/">extrosy.com</a></span>
+  </div>
+</footer>
+
 </body>
 </html>
