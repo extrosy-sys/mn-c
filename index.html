@@ -3,27 +3,253 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Extrosy</title>
+<title>Extrosy — small, private-by-design camera &amp; creative apps</title>
+<meta name="description" content="Extrosy builds computational-photography and creative apps that run entirely on your device — no accounts, no analytics, no cloud. SilkShutter, MotionAmp, PyroSim, and more.">
+<meta property="og:title" content="Extrosy">
+<meta property="og:description" content="Small, private-by-design camera and creative apps. Everything runs on your device — no accounts, no analytics, no cloud.">
+<meta property="og:image" content="https://extrosy.com/silkshutter/img/hero.jpg">
+<meta property="og:url" content="https://extrosy.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
-  body {
-    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.6; max-width: 640px; margin: 0 auto; padding: 4rem 1.25rem;
-    color: #1a1a1a; background: #fff;
+  :root {
+    --bg: #0b0d10;
+    --panel: #12151a;
+    --line: #232830;
+    --ink: #e8ebee;
+    --dim: #9aa3ad;
+    --accent: #b0e0ff;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
   }
-  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #7bb8ff; } }
-  h1 { font-size: 2rem; }
-  ul { padding-left: 1.2rem; }
-  .muted { color: #888; }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-stretch: 100%;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.4rem; }
+
+  .label {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .label::before { content: "— "; color: var(--dim); }
+
+  /* ---------- hero ---------- */
+  header { padding: 4.5rem 0 3.5rem; }
+  .brand {
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 2.2rem;
+  }
+  .brand b { color: var(--ink); font-weight: 500; }
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-stretch: 62%; font-weight: 900;
+    line-height: 1.05; letter-spacing: -0.01em;
+    text-wrap: balance;
+    max-width: 22ch;
+  }
+  h1 .hl { color: var(--accent); }
+  .tagline { margin-top: 1.3rem; font-size: 1.15rem; color: var(--dim); max-width: 38rem; }
+  .tagline b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- sections ---------- */
+  section { border-top: 1px solid var(--line); padding: 4rem 0; }
+  h2 {
+    font-stretch: 70%; font-weight: 800; font-size: 1.9rem;
+    margin: 0.6rem 0 0.8rem; letter-spacing: -0.01em; text-wrap: balance;
+  }
+  .lede { color: var(--dim); max-width: 44rem; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- app cards ---------- */
+  .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2.4rem; }
+  .app {
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 1.7rem 1.8rem; display: flex; flex-direction: column;
+  }
+  .app.featured { border-color: var(--accent); grid-column: 1 / -1; }
+  .app .top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .app h3 {
+    font-stretch: 70%; font-weight: 800; font-size: 1.35rem; letter-spacing: -0.01em;
+  }
+  .app h3 a { color: var(--ink); }
+  .app h3 a:hover { color: var(--accent); text-decoration: none; }
+  .status {
+    font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--dim);
+    border: 1px solid var(--line); padding: 0.3rem 0.6rem; white-space: nowrap;
+  }
+  .status.live { color: var(--accent); border-color: var(--accent); }
+  .app .platform { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); letter-spacing: 0.08em; margin-top: 0.15rem; }
+  .app p.desc { font-size: 0.95rem; color: var(--dim); margin-top: 0.8rem; }
+  .app p.desc b { color: var(--ink); font-weight: 600; }
+  .app .more { margin-top: auto; padding-top: 1rem; font-family: var(--mono); font-size: 0.78rem; }
+
+  .featured .inner { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 2rem; align-items: center; }
+  .featured .shot { border: 1px solid var(--line); padding: 8px; background: var(--bg); max-width: 300px; justify-self: end; }
+  .featured .shot figcaption { font-family: var(--mono); font-size: 0.66rem; color: var(--dim); padding-top: 8px; letter-spacing: 0.05em; }
+
+  /* ---------- ethos ---------- */
+  .ethos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.4rem; }
+  .tenet { background: var(--panel); padding: 1.5rem; }
+  .tenet .n { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; }
+  .tenet h3 { font-size: 1.05rem; margin: 0.6rem 0 0.4rem; font-weight: 700; }
+  .tenet p { font-size: 0.92rem; color: var(--dim); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; font-size: 0.85rem; color: var(--dim); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 860px) {
+    .apps { grid-template-columns: 1fr; }
+    .featured .inner { grid-template-columns: 1fr; }
+    .featured .shot { justify-self: start; }
+    .ethos { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
-  <h1>Extrosy</h1>
-  <p class="muted">Small, private-by-design mobile apps.</p>
-  <h2>Privacy policies</h2>
-  <ul>
-    <li><a href="/silkshutter/">SilkShutter</a></li>
-  </ul>
-  <p class="muted">Contact: <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a></p>
+
+<header class="wrap">
+  <p class="brand"><b>Extrosy</b></p>
+  <h1>Cameras that compute.<br><span class="hl">Apps that stay on your device.</span></h1>
+  <p class="tagline">
+    Extrosy builds small, focused camera and creative apps around one idea:
+    <b>your phone's sensor plus serious computation can do what used to take
+    dedicated gear</b> — and it can do it entirely offline, with no account,
+    no analytics, and no cloud.
+  </p>
+</header>
+
+<section id="apps">
+  <div class="wrap">
+    <p class="label">The apps</p>
+    <h2>Shipping and in the workshop</h2>
+    <p class="lede">
+      One app is headed to Google Play now; the rest are working software in
+      active development, being tuned on real scenes before release.
+    </p>
+
+    <div class="apps">
+      <div class="app featured">
+        <div class="inner">
+          <div style="display:flex; flex-direction:column; min-width:0;">
+            <div class="top">
+              <h3><a href="/silkshutter/">SilkShutter</a></h3>
+              <span class="status live">Coming soon to Google Play</span>
+            </div>
+            <p class="platform">ANDROID · IOS PORT IN DEVELOPMENT</p>
+            <p class="desc">
+              Real long-exposure photography with no tripod and no ND filters.
+              SilkShutter records a stream of short, sharp frames, registers every
+              frame to the scene to cancel your handshake, and blends them on the
+              GPU into a single photograph — <b>silky waterfalls, light trails,
+              vanished crowds</b> — live while you shoot, or from any video you
+              import. Output up to 8K, finished in-app.
+            </p>
+            <p class="more"><a href="/silkshutter/">Full feature tour →</a></p>
+          </div>
+          <figure class="shot">
+            <img src="/silkshutter/img/falls.jpg" alt="Waterfall rendered as silky white veils, shot handheld with SilkShutter" width="787" height="1400" loading="lazy">
+            <figcaption>Handheld, no tripod — straight off the phone.</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="app">
+        <div class="top">
+          <h3>MotionAmp</h3>
+          <span class="status">In development</span>
+        </div>
+        <p class="platform">ANDROID</p>
+        <p class="desc">
+          A motion-microscope for your phone. MotionAmp measures the tiny motion
+          in a live camera feed with custom optical flow and <b>amplifies it until
+          you can see it</b> — structures swaying, machinery vibrating, things that
+          look perfectly still to the naked eye.
+        </p>
+      </div>
+
+      <div class="app">
+        <div class="top">
+          <h3>PyroSim</h3>
+          <span class="status">In development</span>
+        </div>
+        <p class="platform">ANDROID</p>
+        <p class="desc">
+          Design fireworks shows on a phone. A GPU-rendered simulator with a
+          recursive firework builder — shells inside shells inside shells — plus
+          scenes, weather, and a piano-roll show editor that can
+          <b>choreograph an entire display to music, beat by beat</b>.
+        </p>
+      </div>
+
+      <div class="app">
+        <div class="top">
+          <h3>LongExpo PC</h3>
+          <span class="status">In development</span>
+        </div>
+        <p class="platform">WINDOWS</p>
+        <p class="desc">
+          The desktop original that SilkShutter grew out of. Turns video files
+          into long-exposure photographs on the GPU with 16-bit precision —
+          <b>the research bench where the alignment engines are invented</b>
+          before they ship on mobile.
+        </p>
+      </div>
+
+      <div class="app">
+        <div class="top">
+          <h3>SilkShutter for iOS</h3>
+          <span class="status">In development</span>
+        </div>
+        <p class="platform">IPHONE · METAL</p>
+        <p class="desc">
+          A native port of SilkShutter to the iPhone — same alignment engines and
+          blend modes, rebuilt in Swift on Metal.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ethos">
+  <div class="wrap">
+    <p class="label">How they're built</p>
+    <h2>Private by design, not by policy</h2>
+    <div class="ethos">
+      <div class="tenet">
+        <span class="n">01 / ON-DEVICE</span>
+        <h3>Everything runs locally</h3>
+        <p>Capture, processing, and output all happen on your device's own GPU. Every app works in airplane mode.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">02 / NO ACCOUNTS</span>
+        <h3>Nothing to sign up for</h3>
+        <p>No accounts, no analytics, no tracking. Your photos go to your gallery and nowhere else.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">03 / REAL INSTRUMENTS</span>
+        <h3>Tools, not filters</h3>
+        <p>Manual controls, honest processing, full-quality output with proper metadata — apps built like camera equipment, not toys.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Extrosy · <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a></span>
+    <span><a href="/silkshutter/privacy/">SilkShutter privacy policy</a></span>
+  </div>
+</footer>
+
 </body>
 </html>
