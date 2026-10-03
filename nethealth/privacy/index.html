@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NetHealth — Privacy Policy</title>
+<meta name="description" content="Privacy policy for NetHealth, the network health checker for Android by Extrosy. No accounts, no ads, no analytics; results stay on your device.">
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+    color: #1a1a1a; background: #fff;
+  }
+  @media (prefers-color-scheme: dark) { body { color: #e6e6e6; background: #121212; } a { color: #7bb8ff; } td, th { border-color: #333 !important; } }
+  h1 { font-size: 1.7rem; margin-bottom: 0.25rem; }
+  h2 { font-size: 1.15rem; margin-top: 2rem; }
+  .meta { color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .highlight { border-left: 3px solid #4a90d9; padding: 0.5rem 1rem; background: rgba(74,144,217,0.08); border-radius: 4px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; margin-top: 0.6rem; }
+  th, td { text-align: left; vertical-align: top; padding: 0.5rem 0.6rem; border-bottom: 1px solid #ddd; }
+  th { font-weight: 600; }
+  td:first-child { width: 34%; }
+  code { font-size: 0.88em; overflow-wrap: anywhere; }
+  footer { margin-top: 3rem; font-size: 0.85rem; color: #888; }
+  .back { font-size: 0.9rem; }
+  @media (max-width: 560px) {
+    table, tbody, tr, td { display: block; width: 100% !important; }
+    thead { display: none; }
+    tr { border-bottom: 1px solid #ddd; padding: 0.4rem 0; }
+    td { border: none; padding: 0.15rem 0; }
+    td:first-child { font-weight: 600; }
+  }
+</style>
+</head>
+<body>
+
+<p class="back"><a href="/nethealth/">← NetHealth</a></p>
+
+<h1>Privacy Policy — NetHealth</h1>
+<p class="meta">App published by Extrosy · Last updated: 2 October 2026</p>
+
+<p class="highlight">
+  <strong>The short version:</strong> NetHealth has no accounts, no advertising, no analytics and
+  no tracking, and Extrosy runs no servers — so we receive nothing from you. To test your
+  connection the app has to contact public test servers, which see your internet address the way
+  any website does. Your results, reports and logs stay on your device unless you choose to share them.
+</p>
+
+<h2>What we collect</h2>
+<p>
+  <strong>Nothing.</strong> NetHealth does not send any information to Extrosy. There is no sign-in,
+  no advertising, no analytics, no crash-reporting service and no third-party SDK in the app — it
+  contains only Google's standard Android libraries (AndroidX and Material Components).
+</p>
+
+<h2>What the app sends over the internet, and to whom</h2>
+<p>
+  A network health checker cannot work offline: to measure your connection it has to talk to
+  servers on the internet. Every server it contacts sees your device's public internet address and
+  the request itself, exactly as any website you visit does; what those services do with that is
+  covered by their own privacy policies. NetHealth sends them no personal information beyond what
+  the test needs, as listed here.
+</p>
+<table>
+  <thead><tr><th>What for</th><th>Who it talks to, and what is sent</th></tr></thead>
+  <tbody>
+    <tr><td>Sign-in page detection</td><td><code>www.msftconnecttest.com</code> and <code>connectivitycheck.gstatic.com</code> — the same tiny test requests Windows and Android make.</td></tr>
+    <tr><td>Your public address and provider</td><td><code>api.ipify.org</code> (also <code>api4.</code> / <code>api6.ipify.org</code>) tells the app its own public address. <code>ip-api.com</code> receives that address and returns the provider and approximate area it belongs to. ip-api.com's free service answers over plain HTTP, so that lookup is not encrypted.</td></tr>
+    <tr><td>Speed and load tests</td><td><code>speed.cloudflare.com</code> — the app downloads and uploads blocks of meaningless test data. Can be switched off with "Skip the speed test".</td></tr>
+    <tr><td>Ping, traceroute and DNS</td><td>Google (8.8.8.8, <code>dns.google</code>), Cloudflare (1.1.1.1), Quad9 and OpenDNS, plus whatever targets you set in Settings. DNS questions include test names such as <code>google.com</code> and made-up names that cannot be cached.</td></tr>
+    <tr><td>Clock accuracy</td><td>Public time servers: <code>time.google.com</code>, <code>pool.ntp.org</code>, <code>time.windows.com</code>, <code>time.cloudflare.com</code>, <code>time.android.com</code>.</td></tr>
+    <tr><td>NAT type, calls and meetings</td><td>STUN requests to <code>stun.l.google.com</code> and <code>stun.cloudflare.com</code>; Microsoft Teams' relay (<code>worldaz.tr.teams.microsoft.com</code>) and Google Meet's relay (<code>meet.turns.goog</code>); the sign-in sites of Teams, Meet, Zoom and Webex are opened but nothing is signed in to.</td></tr>
+    <tr><td>Secure connections and tampering</td><td>Ordinary HTTPS connections to six large sites (www.google.com, www.microsoft.com, www.cloudflare.com, www.apple.com, www.amazon.com, github.com) to check who issued their certificates, and plain-HTTP requests to github.com, www.wikipedia.org and www.paypal.com to check that they still send you to HTTPS.</td></tr>
+    <tr><td>Remote-desktop and port reachability</td><td><code>ping3.teamviewer.com</code>, <code>remoting-pa.googleapis.com</code> and <code>portquiz.net</code> — connection attempts only.</td></tr>
+    <tr><td>Gaming readiness</td><td>Connection timing to Amazon S3 in five regions, a Minecraft server-list ping to <code>mc.hypixel.net</code>, and the public sign-in / connection-test addresses of Xbox Live, PlayStation Network, Nintendo and Steam. Nothing is signed in to.</td></tr>
+    <tr><td>Tools you run by hand</td><td>Only what you type: the host you ping, trace, scan or look up. <strong>IP whois</strong> asks IANA and the regional internet registries (RDAP), Team Cymru (by DNS) and ip-api.com about the address you entered. <strong>Route map</strong> sends the addresses of the routers on the path to ip-api.com to place them on the map.</td></tr>
+    <tr><td>Your router</td><td>UPnP / NAT-PMP requests to the router on your own network. The router check adds a test port opening for two minutes and removes it; the "Two devices" waiting side asks the router to open its port for the session and closes it afterwards.</td></tr>
+    <tr><td>Two devices</td><td>Only the device you choose. Measurement packets, and the results of the run, are exchanged with it; the other device saves its log on that device.</td></tr>
+    <tr><td>The connection monitor</td><td>While you run it: a ping a second to your ping target, a kept-open HTTPS connection to <code>www.google.com</code>, a STUN request to Google every few seconds, DNS look-ups and the sign-in page test - the items you can switch off are listed on the Monitor screen.</td></tr>
+    <tr><td>Devices on this network</td><td>Only your own local network: pings, connection attempts and the standard discovery protocols devices answer (mDNS, SSDP/UPnP, NetBIOS). Nothing from the scan leaves your network.</td></tr>
+  </tbody>
+</table>
+
+<h2>Location</h2>
+<p>
+  Android hides the Wi-Fi network name, the access point and the list of nearby networks from any
+  app without location permission, so NetHealth asks for it to analyse Wi-Fi. It is optional: the
+  "Scan nearby Wi-Fi networks" setting turns the request and the scans off, and the rest of the app
+  keeps working. The connection monitor keeps that access while the screen is off so it can notice
+  roaming between access points. The Route map uses the device's last known location to mark
+  "you" only if location permission is already granted. <strong>Location is used on the device only
+  and is never sent anywhere.</strong>
+</p>
+
+<h2>What is stored on your device</h2>
+<p>
+  Reports, logs, the history of past checks, your settings, the devices seen on each network (their
+  names and hardware addresses, so a new device can be marked as new) and simple notes per network
+  (for example whether a sign-in page was ever seen there). All of it lives in the app's private
+  storage, is never uploaded, and is removed when you uninstall the app. <strong>Reports &gt; Clean up</strong>
+  deletes reports and logs at any time.
+</p>
+
+<h2>Sharing</h2>
+<p>
+  A report or log leaves your device only when you tap <strong>Share</strong> and pick where it goes.
+  Reports can contain your network's details — addresses, the provider, Wi-Fi names — so look before
+  you send one.
+</p>
+
+<h2>When the app works in the background</h2>
+<p>
+  Only when you ask it to: the connection monitor and the two-device measurement run as a foreground
+  service with a notification for as long as you leave them running, and the optional scheduled check
+  (off by default, Reports &gt; Check on a schedule) runs the checks — without the speed tests — every
+  few hours and adds the result to the history on your device.
+</p>
+
+<h2>Permissions</h2>
+<ul>
+  <li><strong>Internet and network state</strong> — to run the tests.</li>
+  <li><strong>Location / nearby Wi-Fi devices</strong> — required by Android to read Wi-Fi names and scan results (see above).</li>
+  <li><strong>Wi-Fi state and multicast</strong> — to read the Wi-Fi link and to find other devices on your network.</li>
+  <li><strong>Notifications, foreground service, wake lock</strong> — so a long monitor run keeps going with the screen off.</li>
+  <li><strong>Battery optimisation</strong> — the monitor may ask to run unrestricted, so Android does not freeze it mid-run.</li>
+  <li><strong>Run at start-up</strong> — only so a scheduled check you switched on survives a restart.</li>
+</ul>
+
+<h2>Children</h2>
+<p>
+  NetHealth is a general-audience network utility. Because it collects no personal information, it
+  does not knowingly collect data from children or anyone else.
+</p>
+
+<h2>Changes to this policy</h2>
+<p>
+  If this policy changes, the updated version will be posted at this same address with a new
+  "Last updated" date.
+</p>
+
+<h2>Contact</h2>
+<p>
+  Questions about this policy? Email <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a>.
+</p>
+
+<footer>© 2026 Extrosy. NetHealth Privacy Policy.</footer>
+
+</body>
+</html>
