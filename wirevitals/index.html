@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WireVitals — find out what is really wrong with your connection</title>
+<meta name="description" content="WireVitals runs 27 network checks in about a minute and explains, in plain words, whether the problem is your Wi-Fi, your router, your provider or something in between — then keeps watching when it only happens sometimes. Android, no account, no ads.">
+<meta property="og:title" content="WireVitals — is it the Wi-Fi, the router or the internet?">
+<meta property="og:description" content="27 checks in about a minute, explained in plain words. A monitor for the drops that only happen sometimes, a two-device path test, a Wi-Fi analyser and 18 network tools. No account, no ads, no analytics.">
+<meta property="og:url" content="https://extrosy.com/wirevitals/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0d10;
+    --panel: #12151a;
+    --line: #232830;
+    --ink: #e8ebee;
+    --dim: #9aa3ad;
+    --accent: #8ec5ff;           /* the app's own info blue, lightened for the dark page */
+    --pass: #3fb950;
+    --warn: #eab308;
+    --fail: #f85149;
+    --info: #58a6ff;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-stretch: 100%;
+    line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 1.4rem; }
+
+  .label {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .label::before { content: "— "; color: var(--dim); }
+
+  /* ---------- hero ---------- */
+  header.wrap { padding-top: 4.5rem; padding-bottom: 3.5rem; }   /* .wrap's own padding would override a plain header rule */
+  .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem; align-items: center; }
+  .brand {
+    font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 2.2rem;
+  }
+  .brand b { color: var(--ink); font-weight: 500; }
+  .brand a { color: var(--dim); }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    font-stretch: 62%; font-weight: 900;
+    line-height: 1.03; letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h1 .hl { color: var(--accent); }
+  .tagline { margin-top: 1.3rem; font-size: 1.15rem; color: var(--dim); max-width: 34rem; }
+  .tagline b { color: var(--ink); font-weight: 600; }
+  .cta { margin-top: 2.2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .badge {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.08em;
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0.65rem 1.1rem;
+  }
+  .cta .sub { font-family: var(--mono); font-size: 0.78rem; color: var(--dim); }
+
+  /* ---------- the example result (an illustration, drawn in HTML) ---------- */
+  .result { border: 1px solid var(--line); background: var(--panel); padding: 10px; width: 100%; max-width: 440px; justify-self: center; }
+  .result .verdict { background: #171e27; border: 1px solid var(--line); padding: 0.9rem 1rem; }
+  .result .verdict .pill { margin-right: 0.5rem; }
+  .result .verdict p { font-size: 0.86rem; color: var(--dim); margin-top: 0.45rem; line-height: 1.5; }
+  .result .verdict p b { color: var(--ink); font-weight: 600; }
+  .rows { list-style: none; padding: 0; margin-top: 8px; }
+  .rows li { display: grid; grid-template-columns: 4.1rem 1fr; gap: 0.7rem; align-items: start; padding: 0.55rem 0.4rem; border-top: 1px solid var(--line); }
+  .rows .name { font-size: 0.86rem; font-weight: 600; }
+  .rows .sum { font-size: 0.78rem; color: var(--dim); line-height: 1.45; }
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.1em;
+    padding: 0.18rem 0.45rem; border-radius: 3px; text-align: center; color: #0b0d10;
+  }
+  .pill.pass { background: var(--pass); }
+  .pill.warn { background: var(--warn); color: #1f2328; }
+  .pill.fail { background: var(--fail); }
+  .pill.info { background: var(--info); }
+  .result figcaption { font-family: var(--mono); font-size: 0.66rem; color: var(--dim); padding-top: 9px; letter-spacing: 0.05em; }
+
+  /* ---------- sections ---------- */
+  section { border-top: 1px solid var(--line); padding: 4rem 0; }
+  h2 {
+    font-stretch: 70%; font-weight: 800; font-size: 1.9rem;
+    margin: 0.6rem 0 0.8rem; letter-spacing: -0.01em; text-wrap: balance;
+  }
+  .lede { color: var(--dim); max-width: 46rem; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.2rem; }
+  .step { background: var(--panel); padding: 1.5rem; }
+  .step .n { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; }
+  .step h3 { font-size: 1.05rem; margin: 0.6rem 0 0.4rem; font-weight: 700; }
+  .step p { font-size: 0.92rem; color: var(--dim); }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
+  .feat h3 { font-size: 1rem; font-weight: 700; }
+  .feat h3::before { content: "▸ "; color: var(--accent); }
+  .feat p { font-size: 0.92rem; color: var(--dim); margin-top: 0.3rem; }
+
+  .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; margin-top: 2.4rem; }
+  .mode { border: 1px solid var(--line); background: var(--panel); padding: 1.5rem 1.6rem; }
+  .mode .name { font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.18em; color: var(--accent); }
+  .mode h3 { font-size: 1.1rem; margin: 0.5rem 0 0.4rem; font-weight: 700; }
+  .mode p { font-size: 0.92rem; color: var(--dim); }
+  .mode p b { color: var(--ink); font-weight: 600; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
+  .tools span { font-family: var(--mono); font-size: 0.76rem; border: 1px solid var(--line); background: var(--panel); padding: 0.35rem 0.7rem; color: var(--ink); }
+
+  .ethos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 2.4rem; }
+  .tenet { background: var(--panel); padding: 1.5rem; }
+  .tenet .n { font-family: var(--mono); color: var(--accent); font-size: 0.75rem; letter-spacing: 0.15em; }
+  .tenet h3 { font-size: 1.05rem; margin: 0.6rem 0 0.4rem; font-weight: 700; }
+  .tenet p { font-size: 0.92rem; color: var(--dim); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; font-size: 0.85rem; color: var(--dim); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .result { justify-self: start; }
+    .steps, .ethos { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 0 1rem; }
+    header.wrap { padding-top: 3rem; }
+    .modes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <p class="brand"><b>WireVitals</b> · by <a href="/">Extrosy</a></p>
+  <div class="hero">
+    <div>
+      <h1>Is it the Wi-Fi, the router, or the internet?<br><span class="hl">Now you'll know.</span></h1>
+      <p class="tagline">
+        WireVitals runs <b>27 checks in about a minute</b> and tells you, in plain words,
+        what is actually wrong with your connection — and <b>keeps watching for hours</b>
+        when the problem only shows up sometimes.
+      </p>
+      <div class="cta">
+        <span class="badge">ANDROID · IN DEVELOPMENT</span>
+        <span class="sub">Android 8+ · no account · no ads</span>
+      </div>
+    </div>
+    <figure class="result" aria-label="Example of a WireVitals result">
+      <div class="verdict">
+        <span class="pill warn">WARN</span><b>1 thing worth fixing</b>
+        <p><b>Calls and games lag while the line is busy.</b> Latency climbs at half your
+        download speed — bufferbloat in the router. Turning on SQM / Smart Queue at about
+        85 Mbps would keep it flat.</p>
+      </div>
+      <ul class="rows">
+        <li><span class="pill pass">PASS</span><div><div class="name">Wi-Fi</div><div class="sum">Strong signal on 5 GHz, channel 36 — 2x2 MIMO, airtime 18% busy</div></div></li>
+        <li><span class="pill pass">PASS</span><div><div class="name">Internet ping</div><div class="sum">0% loss, 14 ms, jitter 1.2 ms</div></div></li>
+        <li><span class="pill info">INFO</span><div><div class="name">DNS cross-check</div><div class="sum">Your router answers DNS meant for 8.8.8.8 itself</div></div></li>
+        <li><span class="pill pass">PASS</span><div><div class="name">Calls &amp; meetings</div><div class="sum">Teams and Meet media: 50/50 replies, jitter 3 ms</div></div></li>
+        <li><span class="pill warn">WARN</span><div><div class="name">Latency under load</div><div class="sum">+140 ms at 50% of the line; flat at 25%</div></div></li>
+        <li><span class="pill pass">PASS</span><div><div class="name">Path MTU</div><div class="sum">1492 bytes, and routers report it properly — no black hole</div></div></li>
+      </ul>
+      <figcaption>Example result, drawn for this page — the app shows one row per check.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<section id="how">
+  <div class="wrap">
+    <p class="label">How it works</p>
+    <h2>Measure everything. Explain it like a person would.</h2>
+    <p class="lede">
+      "The internet is slow" can mean a weak Wi-Fi channel, a router that queues too much,
+      a provider sharing one address between hundreds of homes, or a DNS server that has
+      stopped answering. WireVitals checks <b>each link in the chain separately</b>, so the
+      answer names the part that is actually broken.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <span class="n">01 / CHECK</span>
+        <h3>27 checks, one tap</h3>
+        <p>Wi-Fi, router, DNS, the path out to the internet, NAT, speed, latency under load and more — each row appears the moment its check starts, with its findings as they come in.</p>
+      </div>
+      <div class="step">
+        <span class="n">02 / EXPLAIN</span>
+        <h3>A diagnosis, not a number</h3>
+        <p>A plain-English verdict names the root cause and what to do about it. Tap any row for the tables, charts and raw measurements behind it — and re-run that one check.</p>
+      </div>
+      <div class="step">
+        <span class="n">03 / WATCH</span>
+        <h3>For the drops that come and go</h3>
+        <p>Leave the monitor running for hours, screen off. Every hiccup is logged with its time and its cause — so "it dropped at 9:40" becomes evidence.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="checks">
+  <div class="wrap">
+    <p class="label">What it checks</p>
+    <h2>From the Wi-Fi radio to the far end of the internet</h2>
+    <div class="grid">
+      <div class="feat"><h3>Wi-Fi, properly</h3><p>Signal steadiness, band and channel width, how busy the access point says its airtime is, roaming, security, and how many MIMO streams the link really uses.</p></div>
+      <div class="feat"><h3>Your router and its DHCP</h3><p>Loss and jitter to the router, the DHCP server and the lease it hands out, and any extra IPv6 router announcing itself on the network.</p></div>
+      <div class="feat"><h3>The path out</h3><p>Ping, jitter and loss to the internet, a hop-by-hop traceroute that spots carrier-grade and double NAT, and a path-MTU test that finds the "black holes" that stall VPNs.</p></div>
+      <div class="feat"><h3>DNS you can trust</h3><p>Your DNS against Google, Cloudflare and Quad9 — including whether your router quietly answers in their place.</p></div>
+      <div class="feat"><h3>Speed with the delay that matters</h3><p>Download and upload graphed every half second, then the line held at 25, 50 and 75% while latency is measured: bufferbloat, with the SQM setting that fixes it.</p></div>
+      <div class="feat"><h3>Calls &amp; meetings</h3><p>Real media tests against Microsoft Teams' and Google Meet's own relays — round trip, jitter and loss graded against Microsoft's published limits.</p></div>
+      <div class="feat"><h3>Gaming readiness</h3><p>NAT type in console words (Open / Moderate / Strict), the nearest cloud region, lag while the line is busy, and Xbox Live, PlayStation Network, Nintendo and Steam reachability.</p></div>
+      <div class="feat"><h3>Tampering &amp; attacks</h3><p>Login-stealing name poisoners, forged DNS answers, certificates re-signed by something in the middle, HTTPS being stripped, and sign-in pages that ask for a password without encryption.</p></div>
+      <div class="feat"><h3>VPNs and proxies</h3><p>With a VPN up: does your web traffic, your DNS or your IPv6 leak around it?</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="more">
+  <div class="wrap">
+    <p class="label">Beyond the one-minute check</p>
+    <h2>The rest of the toolbox</h2>
+    <div class="modes">
+      <div class="mode"><span class="name">MONITOR</span><h3>Watch a flaky connection for hours</h3><p>Internet pings, plus the watchers you pick — your router, a long-lived connection, a call-style UDP keepalive, DNS, Wi-Fi roaming — with a live latency chart and an event log you can share. <b>Runs with the screen off.</b></p></div>
+      <div class="mode"><span class="name">TWO DEVICES</span><h3>Measure the path between two phones</h3><p>Loss in each direction, how long the network keeps idle connections alive, a speed ramp that times the delay as it climbs, and a 20-second call test with a <b>MOS voice score</b> and SIP ALG detection — all drawn live.</p></div>
+      <div class="mode"><span class="name">WI-FI ANALYSER</span><h3>See the air around you</h3><p>Every nearby network drawn across the frequencies it really occupies, a spectrum waterfall, airtime per channel, and a walk-the-house speed survey (with a second device) that says whether a dead spot is weak signal or busy air.</p></div>
+      <div class="mode"><span class="name">DEVICES</span><h3>Who is on this network</h3><p>Every device found, its maker and likely kind, open ports — and a <b>NEW</b> badge on anything never seen on this network before.</p></div>
+      <div class="mode"><span class="name">HISTORY</span><h3>Trends over days</h3><p>Every full check is kept. Charts and a day-by-day table show which problem keeps coming back and whether evenings are slower — with an optional check every few hours.</p></div>
+      <div class="mode"><span class="name">SYSTEM</span><h3>Is it the phone, not the network?</h3><p>A minute of CPU, memory and traffic, one reading a second — because a phone flat out on CPU stutters calls exactly like a bad line.</p></div>
+    </div>
+    <p class="lede" style="margin-top:2.4rem"><b>18 tools</b> for checking one thing by hand:</p>
+    <div class="tools">
+      <span>Ping</span><span>Traceroute</span><span>Route map</span><span>TCP traceroute</span><span>DNS lookup</span><span>DNS speed</span>
+      <span>Port check</span><span>Full port scan</span><span>Router port openings</span><span>Web request</span><span>TLS certificate</span><span>Whois</span>
+      <span>IP whois</span><span>Subnet calculator</span><span>Wake-on-LAN</span><span>Path MTU</span><span>Time server</span><span>Network info</span>
+    </div>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="wrap">
+    <p class="label">Private by design</p>
+    <h2>It tests your connection. It doesn't report on you.</h2>
+    <div class="ethos">
+      <div class="tenet">
+        <span class="n">01 / NO ACCOUNTS</span>
+        <h3>Nothing to sign up for</h3>
+        <p>No account, no ads, no analytics, no third-party SDKs. Extrosy runs no servers and receives nothing from the app.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">02 / ON YOUR DEVICE</span>
+        <h3>Results stay with you</h3>
+        <p>Reports, logs and history live in the app's private storage and leave only when you tap Share.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">03 / NAMED SERVERS</span>
+        <h3>Every server, listed</h3>
+        <p>A network test has to talk to the internet. The <a href="/wirevitals/privacy/">privacy policy</a> lists every test server the app contacts, and what it sends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Extrosy · <a href="mailto:extrosy@gmail.com">extrosy@gmail.com</a></span>
+    <span><a href="/wirevitals/privacy/">Privacy</a> · <a href="/wirevitals/terms/">Terms</a> · <a href="/wirevitals/licenses/">Open source</a> · <a href="/">extrosy.com</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
