@@ -38,7 +38,7 @@
 <p class="back"><a href="/wirevitals/">← WireVitals</a></p>
 
 <h1>Privacy Policy — WireVitals</h1>
-<p class="meta">App published by Extrosy · Last updated: 2 October 2026</p>
+<p class="meta">App published by Extrosy · Last updated: 6 October 2026</p>
 
 <p class="highlight">
   <strong>The short version:</strong> WireVitals has no accounts, no advertising, no analytics and
@@ -73,7 +73,7 @@
     <tr><td>NAT type, calls and meetings</td><td>STUN requests to <code>stun.l.google.com</code> and <code>stun.cloudflare.com</code>; Microsoft Teams' relay (<code>worldaz.tr.teams.microsoft.com</code>) and Google Meet's relay (<code>meet.turns.goog</code>); the sign-in sites of Teams, Meet, Zoom and Webex are opened but nothing is signed in to.</td></tr>
     <tr><td>Secure connections and tampering</td><td>Ordinary HTTPS connections to six large sites (www.google.com, www.microsoft.com, www.cloudflare.com, www.apple.com, www.amazon.com, github.com) to check who issued their certificates, and plain-HTTP requests to github.com, www.wikipedia.org and www.paypal.com to check that they still send you to HTTPS.</td></tr>
     <tr><td>Remote-desktop and port reachability</td><td><code>ping3.teamviewer.com</code>, <code>remoting-pa.googleapis.com</code> and <code>portquiz.net</code> — connection attempts only.</td></tr>
-    <tr><td>Gaming readiness</td><td>Connection timing to Amazon S3 in five regions, a Minecraft server-list ping to <code>mc.hypixel.net</code>, and the public sign-in / connection-test addresses of Xbox Live, PlayStation Network, Nintendo and Steam. Nothing is signed in to.</td></tr>
+    <tr><td>Gaming readiness</td><td>A small UDP packet to the Amazon GameLift ping servers in each AWS region (<code>gamelift-ping.&lt;region&gt;.api.aws</code>), which send it straight back; Steam's public relay list (<code>api.steampowered.com</code>) and a ping to one relay in each city on it; Discord's public list of nearby voice servers (<code>latency.discord.media</code>) and a connection to each; a Minecraft server-list ping to <code>mc.hypixel.net</code>; and the public sign-in / connection-test addresses of Xbox Live, PlayStation Network, Nintendo, Steam and Discord. Nothing is signed in to.</td></tr>
     <tr><td>Tools you run by hand</td><td>Only what you type: the host you ping, trace, scan or look up. <strong>IP whois</strong> asks IANA and the regional internet registries (RDAP), Team Cymru (by DNS) and ipwhois.io about the address you entered. <strong>Route map</strong> sends the addresses of the routers on the path to ipwhois.io, one at a time over HTTPS, to place them on the map.</td></tr>
     <tr><td>Your router</td><td>UPnP / NAT-PMP requests to the router on your own network. The router check adds a test port opening for two minutes and removes it; the "Two devices" waiting side asks the router to open its port for the session and closes it afterwards.</td></tr>
     <tr><td>Two devices</td><td>Only the device you choose. Measurement packets, and the results of the run, are exchanged with it; the other device saves its log on that device.</td></tr>
