@@ -19,7 +19,7 @@
 <p class="back"><a href="/wirevitals/">← WireVitals</a></p>
 
 <h1>Open-source notices — WireVitals</h1>
-<p class="meta">Published by Extrosy · Last updated: 2 October 2026</p>
+<p class="meta">Published by Extrosy · Last updated: 7 October 2026</p>
 
 <p>
   WireVitals is built with open-source software and open data. Each component below is licensed to you under its own
@@ -39,10 +39,27 @@
     and Kotlin Programming Language contributors.</li>
   <li><strong>JetBrains Java Annotations</strong>. Copyright JetBrains s.r.o.</li>
   <li><strong>Error Prone annotations</strong> and <strong>Guava ListenableFuture</strong>. Copyright Google LLC.</li>
+  <li><strong>Android DataTransport</strong> (transport-api, transport-backend-cct, transport-runtime) and
+    <strong>Firebase encoders</strong> (firebase-encoders, -json, -proto), which the Google Play Billing Library uses
+    to report its own diagnostics to Google. Copyright Google LLC.</li>
+  <li><strong>javax.inject</strong> (JSR-330 dependency-injection annotations). Copyright the JSR-330 Expert Group.</li>
 </ul>
 <p>
   These components are distributed under the Apache License, Version 2.0, on an "as is" basis, without warranties or
   conditions of any kind. Full text: <a href="/wirevitals/licenses/apache-2.0.txt">Apache License 2.0</a> (also at <a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org</a>).
+</p>
+
+<h2>Google Play components (Android Software Development Kit License)</h2>
+<ul>
+  <li><strong>Google Play Billing Library</strong> (com.android.billingclient:billing) - how the app offers WireVitals
+    Pro and checks whether you own it. Payment itself is handled by Google Play.</li>
+  <li><strong>Google Play services</strong> (base, basement, location, places-placereport, tasks) - required by the
+    billing library.</li>
+</ul>
+<p>
+  These are Google's own components, licensed under the
+  <a href="https://developer.android.com/studio/terms">Android Software Development Kit License Agreement</a>, not
+  under an open-source licence.
 </p>
 
 <h2>Data</h2>

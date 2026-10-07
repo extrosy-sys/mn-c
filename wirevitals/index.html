@@ -6,7 +6,7 @@
 <title>WireVitals — find out what is really wrong with your connection</title>
 <meta name="description" content="WireVitals runs 27 network checks in about a minute and explains, in plain words, whether the problem is your Wi-Fi, your router, your provider or something in between — then keeps watching when it only happens sometimes. Android, no account, no ads.">
 <meta property="og:title" content="WireVitals — is it the Wi-Fi, the router or the internet?">
-<meta property="og:description" content="27 checks in about a minute, explained in plain words. A monitor for the drops that only happen sometimes, a two-device path test, a Wi-Fi analyser and 18 network tools. No account, no ads, no analytics.">
+<meta property="og:description" content="27 checks in about a minute, explained in plain words. A monitor for the drops that only happen sometimes, a two-device path test, a Wi-Fi analyser and 22 network tools. No account, no ads, no analytics.">
 <meta property="og:url" content="https://extrosy.com/wirevitals/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,12 +197,12 @@
       <div class="step">
         <span class="n">02 / EXPLAIN</span>
         <h3>A diagnosis, not a number</h3>
-        <p>A plain-English verdict names the root cause and what to do about it. Tap any row for the tables, charts and raw measurements behind it — and re-run that one check.</p>
+        <p>A plain-English verdict names the root cause and what to do about it, and a card says what the line is good for right now — 4K video, calls, gaming, big uploads. Tap any row for the tables, charts and raw measurements behind it — and re-run that one check.</p>
       </div>
       <div class="step">
         <span class="n">03 / WATCH</span>
         <h3>For the drops that come and go</h3>
-        <p>Leave the monitor running for hours, screen off. Every hiccup is logged with its time and its cause — so "it dropped at 9:40" becomes evidence.</p>
+        <p>Leave the monitor running for hours, screen off, and get an alert the moment the connection drops. Every hiccup is logged with its time and its cause — so "it dropped at 9:40" becomes evidence.</p>
       </div>
     </div>
   </div>
@@ -231,18 +231,43 @@
     <p class="label">Beyond the one-minute check</p>
     <h2>The rest of the toolbox</h2>
     <div class="modes">
-      <div class="mode"><span class="name">MONITOR</span><h3>Watch a flaky connection for hours</h3><p>Internet pings, plus the watchers you pick — your router, a long-lived connection, a call-style UDP keepalive, DNS, Wi-Fi roaming — with a live latency chart and an event log you can share. <b>Runs with the screen off.</b></p></div>
+      <div class="mode"><span class="name">MONITOR</span><h3>Watch a flaky connection for hours</h3><p>Internet pings, plus the watchers you pick — your router, a long-lived connection, a call-style UDP keepalive, DNS, Wi-Fi roaming — with a live latency chart and an event log you can share. It can time <b>every router on the path</b> the whole while, so an outage shows where it starts; add notes as you go, get <b>alerts</b> when it drops and comes back, and turn days of runs into an <b>evidence report</b> for your provider. <b>Runs with the screen off.</b></p></div>
       <div class="mode"><span class="name">TWO DEVICES</span><h3>Measure the path between two phones</h3><p>Loss in each direction, how long the network keeps idle connections alive, a speed ramp that times the delay as it climbs, and a 20-second call test with a <b>MOS voice score</b> and SIP ALG detection — all drawn live.</p></div>
       <div class="mode"><span class="name">WI-FI ANALYSER</span><h3>See the air around you</h3><p>Every nearby network drawn across the frequencies it really occupies, a spectrum waterfall, airtime per channel, and a walk-the-house speed survey (with a second device) that says whether a dead spot is weak signal or busy air.</p></div>
       <div class="mode"><span class="name">DEVICES</span><h3>Who is on this network</h3><p>Every device found, its maker and likely kind, open ports — and a <b>NEW</b> badge on anything never seen on this network before.</p></div>
       <div class="mode"><span class="name">HISTORY</span><h3>Trends over days</h3><p>Every full check is kept. Charts and a day-by-day table show which problem keeps coming back and whether evenings are slower — with an optional check every few hours.</p></div>
       <div class="mode"><span class="name">SYSTEM</span><h3>Is it the phone, not the network?</h3><p>A minute of CPU, memory and traffic, one reading a second — because a phone flat out on CPU stutters calls exactly like a bad line.</p></div>
     </div>
-    <p class="lede" style="margin-top:2.4rem"><b>18 tools</b> for checking one thing by hand:</p>
+    <p class="lede" style="margin-top:2.4rem"><b>22 tools</b> for checking one thing by hand — and a home-screen widget and quick-settings tile that run a check in one tap:</p>
     <div class="tools">
       <span>Ping</span><span>Traceroute</span><span>Route map</span><span>TCP traceroute</span><span>DNS lookup</span><span>DNS speed</span>
       <span>Port check</span><span>Full port scan</span><span>Router port openings</span><span>Web request</span><span>TLS certificate</span><span>Whois</span>
       <span>IP whois</span><span>Subnet calculator</span><span>Wake-on-LAN</span><span>Path MTU</span><span>Time server</span><span>Network info</span>
+      <span>Check from outside</span><span>Signal meter</span><span>Network use by app</span><span>iperf3 speed test</span>
+    </div>
+  </div>
+</section>
+
+<section id="pro">
+  <div class="wrap">
+    <p class="label">Free, with an upgrade</p>
+    <h2>Finding the problem is free. Pro is for watching it and proving it.</h2>
+    <div class="ethos">
+      <div class="tenet">
+        <span class="n">FREE</span>
+        <h3>Everything to find it</h3>
+        <p>Check Internet with every check, as often as you like; every tool but iperf3, the signal meter and Check from outside included; the Wi-Fi analyser, the device scan, System, reports, the widget and tile — and being the waiting side of a two-device test. Monitor runs last 30 minutes; a two-device test or a speed survey runs for 30 seconds, once every 15 minutes.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">PRO</span>
+        <h3>Everything to prove it</h3>
+        <p>The monitor without a time limit, overnight included; alerts when the connection drops; every router on the path, over time; checks on a schedule; the evidence report for your provider; full two-device tests with call quality, speed and idle-connection tests; the speed survey without a limit; and iperf3 speed tests to any server.</p>
+      </div>
+      <div class="tenet">
+        <span class="n">ONE PURCHASE</span>
+        <h3>No subscription</h3>
+        <p>Pro is a one-time purchase in the app, through Google Play. No account with us, nothing renewing, and the free part stays free.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -255,7 +280,7 @@
       <div class="tenet">
         <span class="n">01 / NO ACCOUNTS</span>
         <h3>Nothing to sign up for</h3>
-        <p>No account, no ads, no analytics, no third-party SDKs. Extrosy runs no servers and receives nothing from the app.</p>
+        <p>No account, no ads, no analytics, no trackers. Extrosy runs no servers and receives nothing from the app.</p>
       </div>
       <div class="tenet">
         <span class="n">02 / ON YOUR DEVICE</span>
