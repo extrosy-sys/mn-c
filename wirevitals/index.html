@@ -8,6 +8,7 @@
 <meta property="og:title" content="WireVitals — is it the Wi-Fi, the router or the internet?">
 <meta property="og:description" content="27 checks in about a minute, explained in plain words. A monitor for the drops that only happen sometimes, a two-device path test, a Wi-Fi analyser and 22 network tools. No account, no ads, no analytics.">
 <meta property="og:url" content="https://extrosy.com/wirevitals/">
+<meta property="og:image" content="https://extrosy.com/wirevitals/img/two-call.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -126,6 +127,19 @@
   .tenet h3 { font-size: 1.05rem; margin: 0.6rem 0 0.4rem; font-weight: 700; }
   .tenet p { font-size: 0.92rem; color: var(--dim); }
 
+  /* ---------- screenshots ---------- */
+  .shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.8rem 1.3rem; margin-top: 2.4rem; }
+  .shots figure { margin: 0; min-width: 0; }
+  .shots img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+  .shots figcaption { font-size: 0.86rem; color: var(--dim); padding-top: 0.75rem; line-height: 1.5; }
+  .shots figcaption b { display: block; font-family: var(--mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; color: var(--accent); margin-bottom: 0.25rem; }
+  .shots .aside { border: 1px solid var(--line); background: var(--panel); border-radius: 14px; padding: 1.4rem 1.3rem; align-self: start; }
+  .shots .aside h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .shots .aside p { font-size: 0.88rem; color: var(--dim); }
+  .shots .aside p + p { margin-top: 0.7rem; }
+  .shots .aside b { color: var(--ink); font-weight: 600; }
+  .shots-note { font-family: var(--mono); font-size: 0.7rem; color: var(--dim); margin-top: 1.8rem; letter-spacing: 0.04em; line-height: 1.6; max-width: 46rem; }
+
   footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; font-size: 0.85rem; color: var(--dim); }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
 
@@ -133,6 +147,10 @@
     .hero { grid-template-columns: 1fr; }
     .result { justify-self: start; }
     .steps, .ethos { grid-template-columns: 1fr; }
+    /* Screenshots become one row that scrolls sideways inside the page, a screen at a time. */
+    .shots { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: clamp(200px, 62vw, 260px);
+             overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.9rem; scrollbar-width: thin; }
+    .shots figure, .shots .aside { scroll-snap-align: start; }
   }
   @media (max-width: 480px) {
     .wrap { padding: 0 1rem; }
@@ -208,6 +226,38 @@
   </div>
 </section>
 
+<section id="peer">
+  <div class="wrap">
+    <p class="label">Two devices</p>
+    <h2>Measure the path between two devices, live</h2>
+    <p class="lede">
+      A speed test to a distant server cannot say <b>which end</b> of a connection is at fault. Put WireVitals on two
+      devices: one waits, the other connects and measures everything between them — loss in each direction, a call's
+      worth of packets scored like a real call, the speed each way with the delay timed as it climbs, and how long the
+      network keeps a quiet connection alive. Every figure is drawn the moment it is measured.
+    </p>
+    <div class="shots">
+      <figure><img src="img/two-path.webp" alt="WireVitals measuring the path to another device: packets flowing both ways, 1 ms round trip, none lost" loading="lazy" width="540" height="1200"><figcaption><b>THE PATH</b>Ten packets a second each way. A lost one is drawn on the direction it vanished in.</figcaption></figure>
+      <figure><img src="img/two-call.webp" alt="Tiles showing call quality 4.4 MOS out and back, SIP ALG none, 0% loss each way" loading="lazy" width="540" height="1200"><figcaption><b>CALL QUALITY</b>Twenty seconds of call-sized packets, scored each way (MOS) — and a check for a router that rewrites calls (SIP ALG).</figcaption></figure>
+      <figure><img src="img/two-speed.webp" alt="Speed step: 16 Mbps away from this device and ramping up, delay 2 ms" loading="lazy" width="540" height="1200"><figcaption><b>SPEED, RAMPED</b>Each direction starts slow and doubles until the line is full, while the delay is timed.</figcaption></figure>
+      <figure><img src="img/two-ramp.webp" alt="Chart of download and upload speed ramping up with the round-trip delay plotted alongside" loading="lazy" width="540" height="1200"><figcaption><b>SPEED AND DELAY</b>Flat delay means a busy line won't hurt calls and games; where it climbs is the speed to stay under.</figcaption></figure>
+      <figure><img src="img/two-idle.webp" alt="Idle connection test: two quiet UDP connections held open, one already confirmed alive" loading="lazy" width="540" height="1200"><figcaption><b>QUIET CONNECTIONS</b>How long the network remembers a silent connection — why calls and games drop after a pause.</figcaption></figure>
+      <figure><img src="img/two-report.webp" alt="Saved report with tables for round trip, loss, packet size, speed each way and idle connection lifetimes" loading="lazy" width="540" height="1200"><figcaption><b>THE REPORT</b>Every run is saved with its tables, charts and verdict, ready to share.</figcaption></figure>
+      <figure><img src="img/survey.webp" alt="Wi-Fi speed survey: live download and upload chart with rooms marked as Kitchen, Office and Bedroom" loading="lazy" width="540" height="1200"><figcaption><b>SPEED SURVEY</b>Walk room to room with the other device waiting. Mark each spot; the report compares the rooms.</figcaption></figure>
+      <div class="aside">
+        <h3>How it's set up</h3>
+        <p>On one device, tap <b>Wait for the other device</b>. On the other, tap <b>Find</b> — on the same Wi-Fi it
+        turns up by itself — then <b>Start measuring</b>.</p>
+        <p>The waiting side shows a key for the other to type; on your own Wi-Fi you can switch it off. To measure
+        across the internet, it asks its router to open the port for the session.</p>
+        <p>Waiting is always free. On the connecting side a free run lasts 30 seconds; the full test is part of
+        <a href="#pro">Pro</a>.</p>
+      </div>
+    </div>
+    <p class="shots-note">Screens from the app in an Android emulator, measuring against a second device on the same computer — so the addresses shown are the emulator's own.</p>
+  </div>
+</section>
+
 <section id="checks">
   <div class="wrap">
     <p class="label">What it checks</p>
@@ -223,6 +273,20 @@
       <div class="feat"><h3>Tampering &amp; attacks</h3><p>Login-stealing name poisoners, forged DNS answers, certificates re-signed by something in the middle, HTTPS being stripped, and sign-in pages that ask for a password without encryption.</p></div>
       <div class="feat"><h3>VPNs and proxies</h3><p>With a VPN up: does your web traffic, your DNS or your IPv6 leak around it?</p></div>
     </div>
+  </div>
+</section>
+
+<section id="screens">
+  <div class="wrap">
+    <p class="label">In the app</p>
+    <h2>Plain answers, live charts</h2>
+    <div class="shots">
+      <figure><img src="img/check.webp" alt="Check Internet results: a row per check with PASS, INFO and WARN pills and a one-line finding each" loading="lazy" width="540" height="1200"><figcaption><b>CHECK INTERNET</b>One row per check, each finding in plain words. Warnings are yellow, failures red.</figcaption></figure>
+      <figure><img src="img/monitor.webp" alt="Monitor: live internet latency chart with spikes labelled, and every router on the path" loading="lazy" width="540" height="1200"><figcaption><b>MONITOR</b>A ping a second, with spikes and drops labelled. With Pro it also watches every router on the path.</figcaption></figure>
+      <figure><img src="img/tools.webp" alt="Tools list: ping, traceroute, route map, check from outside, TCP traceroute, DNS lookup and more" loading="lazy" width="540" height="1200"><figcaption><b>TOOLS</b>The usual network tools, each remembering what you last typed.</figcaption></figure>
+      <figure><img src="img/system.webp" alt="System tab: a minute of CPU, memory and Wi-Fi traffic graphs" loading="lazy" width="540" height="1200"><figcaption><b>SYSTEM</b>A minute of CPU, memory and traffic — is it the phone, not the network?</figcaption></figure>
+    </div>
+    <p class="shots-note">Emulator screenshots. The emulator's own route to the internet is slow, which is what the monitor is catching here.</p>
   </div>
 </section>
 
