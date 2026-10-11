@@ -38,7 +38,7 @@
 <p class="back"><a href="/wirevitals/">← WireVitals</a></p>
 
 <h1>Privacy Policy — WireVitals</h1>
-<p class="meta">App published by Extrosy · Last updated: 7 October 2026</p>
+<p class="meta">App published by Extrosy · Last updated: 11 October 2026</p>
 
 <p class="highlight">
   <strong>The short version:</strong> WireVitals has no accounts, no advertising, no analytics and
@@ -81,7 +81,7 @@
     <tr><td>Your public address and provider</td><td><code>api.ipify.org</code> (also <code>api4.</code> / <code>api6.ipify.org</code>) tells the app its own public address. <code>ipwho.is</code> (ipwhois.io) receives that address over HTTPS and returns the approximate area it belongs to. The provider's name comes from <strong>Team Cymru</strong>'s public routing data: the app asks a DNS question that contains the address (written backwards, as such questions are), which goes through your network's DNS server to Team Cymru. The VPN check asks Team Cymru the same way about the addresses it compares.</td></tr>
     <tr><td>Speed and load tests</td><td><code>speed.cloudflare.com</code> — the app downloads and uploads blocks of meaningless test data. Can be switched off with "Skip the speed test".</td></tr>
     <tr><td>Ping, traceroute and DNS</td><td>Google (8.8.8.8, <code>dns.google</code>), Cloudflare (1.1.1.1), Quad9 and OpenDNS, plus whatever targets you set in Settings. DNS questions include test names such as <code>google.com</code> and made-up names that cannot be cached.</td></tr>
-    <tr><td>Clock accuracy</td><td>Public time servers: <code>time.google.com</code>, <code>pool.ntp.org</code>, <code>time.windows.com</code>, <code>time.cloudflare.com</code>, <code>time.android.com</code>.</td></tr>
+    <tr><td>Clock accuracy</td><td>Public time servers: <code>time.google.com</code>, <code>time.windows.com</code>, <code>time.cloudflare.com</code>, <code>time.android.com</code>.</td></tr>
     <tr><td>NAT type, calls and meetings</td><td>STUN requests to <code>stun.l.google.com</code> and <code>stun.cloudflare.com</code>; Microsoft Teams' relay (<code>worldaz.tr.teams.microsoft.com</code>) and Google Meet's relay (<code>meet.turns.goog</code>); the sign-in sites of Teams, Meet, Zoom and Webex are opened but nothing is signed in to.</td></tr>
     <tr><td>Secure connections and tampering</td><td>Ordinary HTTPS connections to six large sites (www.google.com, www.microsoft.com, www.cloudflare.com, www.apple.com, www.amazon.com, github.com) to check who issued their certificates, and plain-HTTP requests to github.com, www.wikipedia.org and www.paypal.com to check that they still send you to HTTPS.</td></tr>
     <tr><td>Remote-desktop and port reachability</td><td><code>ping3.teamviewer.com</code>, <code>remoting-pa.googleapis.com</code> and <code>portquiz.net</code> — connection attempts only.</td></tr>
@@ -116,6 +116,14 @@
   deletes reports and logs at any time.
 </p>
 
+<h2>Links to other websites</h2>
+<p>
+  <strong>Tools &gt; Useful websites</strong> and the Downdetector link in <strong>Check from outside</strong> are
+  ordinary links: the app does not fetch those pages. When you tap one it opens in your web browser, and that site's own
+  privacy policy applies to your visit. WireVitals sends those sites nothing; the Downdetector link carries the name of
+  the service you typed, as a search.
+</p>
+
 <h2>Sharing</h2>
 <p>
   A report or log leaves your device only when you tap <strong>Share</strong> and pick where it goes.
@@ -142,7 +150,7 @@
   <li><strong>Notifications, foreground service, wake lock</strong> — so a long monitor run keeps going with the screen off, and for the monitor's alerts.</li>
   <li><strong>Usage access</strong> (optional) — only for Tools &gt; Network use by app: Android's own per-app data counts are read on the device and never sent anywhere. Android asks you to allow it, and you can take it back in its settings at any time.</li>
   <li><strong>Google Play billing</strong> — to offer WireVitals Pro through Google Play.</li>
-  <li><strong>Battery optimisation</strong> — the monitor may ask to run unrestricted, so Android does not freeze it mid-run.</li>
+  <li><strong>Battery use</strong> (not a permission) — the monitor may suggest setting WireVitals to Unrestricted in Android's settings, so Android does not freeze it mid-run.</li>
   <li><strong>Run at start-up</strong> — only so a scheduled check you switched on survives a restart.</li>
 </ul>
 
