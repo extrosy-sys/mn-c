@@ -76,6 +76,7 @@
     padding: 10px; max-width: 330px;
   }
   .phone img { width: 100%; }
+  .phone video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; }
   .phone figcaption {
     font-family: var(--mono); font-size: 0.68rem; color: var(--dim);
     padding-top: 9px; letter-spacing: 0.06em;
@@ -160,8 +161,12 @@
       </div>
     </div>
     <figure class="phone">
-      <img src="img/falls.jpg" alt="Waterfall pouring over a limestone ledge into a pool, water rendered as silky white veils" width="787" height="1400">
-      <figcaption><b>Handheld.</b> Shot standing at the railing — no tripod, no ND glass.</figcaption>
+      <video id="promo" autoplay muted loop playsinline preload="metadata" poster="video/silkshutter-promo-poster.jpg" width="720" height="1280"
+             aria-label="Three phone videos turn into long-exposure photos: a waterfall goes silky, water melts around sharp rocks, and a van stays sharp while the road streaks past.">
+        <source src="video/silkshutter-promo.webm" type='video/webm; codecs="av01.0.08M.08"'>
+        <source src="video/silkshutter-promo.mp4" type="video/mp4">
+      </video>
+      <figcaption><b>Video in, photo out.</b> *Stacking is sped up here; actual stacking time varies. Licence plates blurred.</figcaption>
     </figure>
   </div>
 </header>
@@ -276,5 +281,12 @@
   </div>
 </footer>
 
+<script>
+  // people who ask for less motion get the still image and a play button instead of autoplay
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const v = document.getElementById('promo');
+    v.removeAttribute('autoplay'); v.pause(); v.controls = true;
+  }
+</script>
 </body>
 </html>
