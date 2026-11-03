@@ -281,12 +281,5 @@
   </div>
 </footer>
 
-<script>
-  // people who ask for less motion get the still image and a play button instead of autoplay
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const v = document.getElementById('promo');
-    v.removeAttribute('autoplay'); v.pause(); v.controls = true;
-  }
-</script>
 </body>
 </html>
