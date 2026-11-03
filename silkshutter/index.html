@@ -76,7 +76,21 @@
     padding: 10px; max-width: 330px;
   }
   .phone img { width: 100%; }
-  .phone video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; }
+  .phone video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 16; background: #000; cursor: pointer; }
+  .player { position: relative; }
+  /* hidden while playing so it never sits on the picture; shows on mouse-over, keyboard focus, or when stopped */
+  .player button {
+    position: absolute; top: 10px; right: 10px; width: 44px; height: 44px; padding: 11px;
+    border: 1px solid var(--accent); border-radius: 50%; background: rgba(11, 13, 16, 0.72); color: var(--accent);
+    cursor: pointer; opacity: 0; transition: opacity 0.15s;
+  }
+  .player button svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+  .player button .play { display: none; }
+  .player button:focus-visible { opacity: 1; outline: 2px solid var(--accent); outline-offset: 2px; }
+  @media (hover: hover) { .player:hover button { opacity: 1; } }
+  .player.stopped button { opacity: 1; top: 50%; right: 50%; transform: translate(50%, -50%); width: 64px; height: 64px; padding: 18px; }
+  .player.stopped button .play { display: block; }
+  .player.stopped button .pause { display: none; }
   .phone figcaption {
     font-family: var(--mono); font-size: 0.68rem; color: var(--dim);
     padding-top: 9px; letter-spacing: 0.06em;
@@ -161,13 +175,40 @@
       </div>
     </div>
     <figure class="phone">
-      <video id="promo" autoplay muted loop playsinline preload="metadata" poster="video/silkshutter-promo-poster.jpg" width="720" height="1280"
-             aria-label="Three phone videos turn into long-exposure photos: a waterfall goes silky, water melts around sharp rocks, and a van stays sharp while the road streaks past.">
-        <source src="video/silkshutter-promo.webm" type='video/webm; codecs="av01.0.08M.08"'>
-        <source src="video/silkshutter-promo.mp4" type="video/mp4">
-      </video>
+      <div class="player" id="player">
+        <video id="promo" autoplay muted loop playsinline preload="metadata" poster="video/silkshutter-promo-poster.jpg" width="720" height="1280"
+               aria-label="Three phone videos turn into long-exposure photos: a waterfall goes silky, water melts around sharp rocks, and a van stays sharp while the road streaks past.">
+          <source src="video/silkshutter-promo.webm" type='video/webm; codecs="av01.0.08M.08"'>
+          <source src="video/silkshutter-promo.mp4" type="video/mp4">
+        </video>
+        <button type="button" id="promo-toggle" aria-label="Pause video">
+          <svg class="pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h5v18H5zM14 3h5v18h-5z"/></svg>
+          <svg class="play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.5v19l15-9.5z"/></svg>
+        </button>
+      </div>
       <figcaption><b>Video in, photo out.</b> *Stacking is sped up here; actual stacking time varies. Licence plates blurred.</figcaption>
     </figure>
+    <script>
+      (function () {
+        var player = document.getElementById('player');
+        var video = document.getElementById('promo');
+        var button = document.getElementById('promo-toggle');
+        function show() {
+          player.classList.toggle('stopped', video.paused);
+          button.setAttribute('aria-label', video.paused ? 'Play video' : 'Pause video');
+        }
+        function toggle() {
+          if (video.paused) { video.play(); } else { video.pause(); }
+        }
+        video.addEventListener('play', show);
+        video.addEventListener('pause', show);
+        video.addEventListener('click', toggle);
+        button.addEventListener('click', toggle);
+        // Some browsers refuse to autoplay (iPhone Low Power Mode): offer the play button instead of a dead picture.
+        var started = video.play();
+        if (started) { started.catch(show); }
+      })();
+    </script>
   </div>
 </header>
 
