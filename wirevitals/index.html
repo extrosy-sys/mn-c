@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>WireVitals — find out what is really wrong with your connection</title>
-<meta name="description" content="WireVitals runs 27 network checks in about a minute and explains, in plain words, whether the problem is your Wi-Fi, your router, your provider or something in between — then keeps watching when it only happens sometimes. Android, no account, no ads.">
+<meta name="description" content="WireVitals runs 27 network checks in about a minute and explains, in plain words, whether the problem is your Wi-Fi, your router, your provider or something in between. It tests your NAT type for online games (Open, Moderate or Strict) and says what to change, then keeps watching when a problem only happens sometimes. Android, no account, no ads.">
 <meta property="og:title" content="WireVitals — is it the Wi-Fi, the router or the internet?">
 <meta property="og:description" content="27 checks in about a minute, explained in plain words. A monitor for the drops that only happen sometimes, a two-device path test, a Wi-Fi analyser and 22 network tools. No account, no ads, no analytics.">
 <meta property="og:url" content="https://extrosy.com/wirevitals/">
@@ -171,6 +171,9 @@
         what is actually wrong with your connection — and <b>keeps watching for hours</b>
         when the problem only shows up sometimes.
       </p>
+      <p class="tagline">
+        Stuck on Strict NAT? It tests your <b>NAT type for online games</b>, and says what to change.
+      </p>
       <div class="cta">
         <span class="badge">ANDROID · IN DEVELOPMENT</span>
         <span class="sub">Android 8+ · no account · no ads</span>
@@ -195,6 +198,27 @@
     </figure>
   </div>
 </header>
+
+<section id="games">
+  <div class="wrap">
+    <p class="label">For online games</p>
+    <h2>Strict NAT? Find out why, and what to change.</h2>
+    <p class="lede">
+      When friends can't join your lobby or voice chat won't connect, the usual suspect is your <b>NAT type</b>: how your
+      router shares one public address among your devices. WireVitals tests it from your phone, with <b>no console and no game
+      needed</b>, and answers in the words consoles use. Run it on the same Wi-Fi as your console, because the phone goes through the same router.
+    </p>
+    <div class="grid">
+      <div class="feat"><h3>Open</h3><p>Other players can reach you, because your router opens ports when a game asks. WireVitals really tries it, so this is not a guess. PlayStation calls it Type 2, or Type 1 with no router at all.</p></div>
+      <div class="feat"><h3>Moderate</h3><p>An ordinary router that won't open ports, or two routers in a row. Most matches work, but players behind a strict NAT may not reach you. The fix: turn on UPnP, forward the game's ports, or put one router in bridge mode.</p></div>
+      <div class="feat"><h3>Strict</h3><p>Type 3. Your provider or mobile carrier shares your address, your router gives each destination a different port, or UDP is blocked. Each has a different fix, so WireVitals names the one you have.</p></div>
+      <div class="feat"><h3>Delay and lag</h3><p>Delay to AWS game-server regions worldwide, Steam's relays and nearby Discord voice regions, how steady your ping is, and how much lag you get when the line is busy.</p></div>
+      <div class="feat"><h3>Game services</h3><p>Whether Xbox, PlayStation, Nintendo, Steam and Discord can be reached from your network, and a real game server answering on its own port.</p></div>
+      <div class="feat"><h3>Can the other side reach you?</h3><p>The waiting device shows its private and public address, port and key, and can test a real connection from the internet. On mobile data it usually can't be reached: the app says so, and what to do instead.</p></div>
+    </div>
+    <p class="lede" style="font-size:.85rem;color:var(--dim);margin-top:1.6rem">All of this is in the free version. It is WireVitals' own test, so a console's own test has the final word. WireVitals is not affiliated with Microsoft, Sony, Nintendo, Valve or Discord; their names only say what is tested.</p>
+  </div>
+</section>
 
 <section id="how">
   <div class="wrap">
@@ -269,7 +293,7 @@
       <div class="feat"><h3>DNS you can trust</h3><p>Your DNS against Google, Cloudflare and Quad9 — including whether your router quietly answers in their place.</p></div>
       <div class="feat"><h3>Speed with the delay that matters</h3><p>Download and upload graphed every half second, then the line held at 25, 50 and 75% while latency is measured: bufferbloat, with the SQM setting that fixes it.</p></div>
       <div class="feat"><h3>Calls &amp; meetings</h3><p>Real media tests against Microsoft Teams' and Google Meet's own relays — round trip, jitter and loss graded against Microsoft's published limits.</p></div>
-      <div class="feat"><h3>Gaming readiness</h3><p>NAT type in console words (Open / Moderate / Strict), latency to every AWS game-server region, Steam relay and nearby Discord voice region, lag while the line is busy, and Xbox Live, PlayStation Network, Nintendo, Steam and Discord reachability.</p></div>
+      <div class="feat"><h3>Gaming readiness</h3><p>NAT type in console words (Open / Moderate / Strict), a real test of whether your router opens ports, latency to AWS game-server regions worldwide, Steam relay and nearby Discord voice region, lag while the line is busy, and Xbox Live, PlayStation Network, Nintendo, Steam and Discord reachability.</p></div>
       <div class="feat"><h3>Tampering &amp; attacks</h3><p>Login-stealing name poisoners, forged DNS answers, certificates re-signed by something in the middle, HTTPS being stripped, and sign-in pages that ask for a password without encryption.</p></div>
       <div class="feat"><h3>VPNs and proxies</h3><p>With a VPN up: does your web traffic, your DNS or your IPv6 leak around it?</p></div>
     </div>
